@@ -1,0 +1,14 @@
+ {% extends 'base.html' %}
+
+
+ {% block title%}Статьи{% endblock %}
+
+ {% block content%}
+    {% if late_arti_list %}
+        {%for a in late_arti_list%}
+            <a href="{% url 'aa:detail' a.id%}"> {{a.arti_title}}</a><br>
+        {%endfor%}
+    {% else%}
+        NETY NICHEGO
+    {% endif%}
+ {% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title%} {{arti.arti_title}}{% endblock %}
+
+ {% block content%}
+    <H2>{{arti.arti_title}}</H2>
+    <p>{{arti.arti_text}}</p>
+    <em>{{arti.pub_date}}</em>
+
+    {% if arti.was_publ_res%}
+    НОВАЯ СТАТЬЯ
+    {% endif%}
+<hr>
+    {% if late_comm_list%}
+        {%for c in late_comm_list%}
+            <p>
+                <strong>{{c.author_name}}</strong>
+                <p>{{c.comment_text}}</p>
+            </p>
+        {%endfor%}
+    {%else%}
+        КОМЕНТОВ НЕТ
+    {% endif %}
+<hr>
+<form action="{% url 'aa:leave_comm' arti.id%}" method="POST">
+    {% csrf_token %}
+    <input type="text" required placeholder="Ваше имя" name="name"><br>
+    <textarea name="text" required="" placeholder="Текст" cols="30" rows="10"></textarea><br>
+    <button type="submit">Отправить</button>
+</form>
+ {% endblock %}
